@@ -1,0 +1,350 @@
+<html 
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link href="default.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" type="text/css">
+    <link rel="stylesheet" href="leaflet.css" />
+    <script src="leaflet.js"></script>
+  
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+	</head>
+    <style>
+        .legend {
+                    line-height: 36px;
+                    color: #333;
+                }
+                .legend i {
+                    width: 36px;
+                    height: 36px;
+                    float: left;
+                    margin-right: 10px;
+                    opacity: 0.7;
+                }
+    </style>
+	
+<body>
+
+<div id="header">
+            <div>
+            <!-- empty spacer div, can be used for home page icons -->
+            </div>
+            <div id="title">
+                <h2>
+                Les cas contaminés du COVID_19 à Beni Mellal Khenifra
+                </h2>
+            </div>
+            <div>
+            <!-- empty spacer div, can be used for social media icons -->
+            </div>
+            <div>
+            <!-- empty spacer div, can be used for social media icons -->
+            </div>
+        </div>
+        <div class="wrapper">
+            <!-- The map element -->
+            <div id="map" style="border: 1px solid #ccc"></div>
+            <div id="map-slider"></div>
+                <div id="hovered">
+                    <h2>
+                        <h4>
+                            <div>
+                                <span id="event-start"></span> - <span id="event-end">Du 03 au 09 Janvier 2022</span>
+                            </div>
+                        </h4>
+
+                    </h2>
+                </div>
+               
+            </div>
+        </div>
+
+                        
+                           
+</div>
+<div id="wrapper">
+        <center><div id="mapid" style="width: 1200px; height: 500px;"></div></center>
+        <div class="leaflet-top leaflet-right"><div class="info leaflet-control">
+		<script src="provinces.geojson"></script>
+		<script src="SliderControl.js"></script>
+            <script>
+             var sliderControl = null;
+				var mymap = L.map('mapid').setView([32.613190, -6.980813], 7);
+                
+				L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(mymap);
+
+                function getColor(d) {
+                    return  d >30 ? '#d7301f'  :
+                            d >20 ? '#f03b20'  :
+                            d >10 ? '#fc8d59'  :
+                            d >1 ? '#fdcc8a' :
+                            '#addd8e'       ;
+
+                }
+
+                function style1(feature) {
+                    return {
+                        weight: 2,
+                        opacity: 1,
+                        color: 'black',
+                        dashArray: '3',
+                        fillOpacity: 1,
+                        fillColor: getColor(feature.properties.jan03)
+                    };
+                }
+				 function style2(feature) {
+                    return {
+                        weight: 2,
+                        opacity: 1,
+                        color: 'black',
+                        dashArray: '3',
+                        fillOpacity: 1,
+                        fillColor: getColor(feature.properties.jan04)
+                    };
+                }
+				function style3(feature) {
+                    return {
+                        weight: 2,
+                        opacity: 1,
+                        color: 'black',
+                        dashArray: '3',
+                        fillOpacity: 1,
+                        fillColor: getColor(feature.properties.jan05)
+                    };
+                }
+				function style4(feature) {
+                    return {
+                        weight: 2,
+                        opacity: 1,
+                        color: 'black',
+                        dashArray: '3',
+                        fillOpacity: 1,
+                        fillColor: getColor(feature.properties.jan06)
+                    };
+                }
+				 function style5(feature) {
+                    return {
+                        weight: 2,
+                        opacity: 1,
+                        color: 'black',
+                        dashArray: '3',
+                        fillOpacity: 1,
+                        fillColor: getColor(feature.properties.jan07)
+                    };
+                }
+				function style6(feature) {
+                    return {
+                        weight: 2,
+                        opacity: 1,
+                        color: 'black',
+                        dashArray: '3',
+                        fillOpacity: 1,
+                        fillColor: getColor(feature.properties.jan08)
+                    };
+                }
+				function style7(feature) {
+                    return {
+                        weight: 2,
+                        opacity: 1,
+                        color: 'black',
+                        dashArray: '3',
+                        fillOpacity: 1,
+                        fillColor: getColor(feature.properties.jan09)
+                    };
+                }
+				
+					
+                function highlightFeature(e) {
+                    var layer = e.target;
+
+                    layer.setStyle({
+                        weight: 5,
+                        color: '#777',
+                        dashArray: '',
+                        fillOpacity: 0.7
+                    });                   
+                }
+
+                var geojson1;
+
+                function resetHighlight1(e) {
+                    geojson1.resetStyle(e.target);
+                    
+                }
+				var geojson2;
+
+                function resetHighlight2(e) {
+                    geojson2.resetStyle(e.target);
+                    
+                }
+				var geojson3;
+
+                function resetHighlight3(e) {
+                    geojson3.resetStyle(e.target);
+                
+				var geojson4;  
+                }
+				  function resetHighlight4(e) {
+                    geojson4.resetStyle4(e.target);
+                    
+                }
+				var geojson5;
+
+                function resetHighlight5(e) {
+                    geojson5.resetStyle(e.target);
+                    
+                }
+				var geojson6;
+
+                function resetHighlight6(e) {
+                    geojson6.resetStyle(e.target);
+					
+                var geojson7;
+                }  function resetHighlight7(e) {
+                    geojson7.resetStyle(e.target);
+                    
+                }
+				
+	
+                function zoomToFeature(e) {
+                    mymap.fitBounds(e.target.getBounds());
+                }
+
+                function onEachFeature1(feature, layer) {
+                    layer.on({
+                        mouseover: highlightFeature,
+                        mouseout: resetHighlight1,
+                        click: zoomToFeature
+                    });
+                }
+				 function onEachFeature2(feature, layer) {
+                    layer.on({
+                        mouseover: highlightFeature,
+                        mouseout: resetHighlight2,
+                        click: zoomToFeature
+                    });
+                }
+				function onEachFeature3(feature, layer) {
+                    layer.on({
+                        mouseover: highlightFeature,
+                        mouseout: resetHighlight3,
+                        click: zoomToFeature
+                    });
+                }
+				
+				function onEachFeature4(feature, layer) {
+                    layer.on({
+                        mouseover: highlightFeature,
+                        mouseout: resetHighlight4,
+                        click: zoomToFeature
+                    });
+                }
+				 function onEachFeature5(feature, layer) {
+                    layer.on({
+                        mouseover: highlightFeature,
+                        mouseout: resetHighlight5,
+                        click: zoomToFeature
+                    });
+                }
+				function onEachFeature6(feature, layer) {
+                    layer.on({
+                        mouseover: highlightFeature,
+                        mouseout: resetHighlight6,
+                        click: zoomToFeature
+                    });
+                }                
+				function onEachFeature7(feature, layer) {
+                    layer.on({
+                        mouseover: highlightFeature,
+                        mouseout: resetHighlight7,
+                        click: zoomToFeature
+                    });
+                }
+				 
+				
+				
+                geojson1 = L.geoJson(provinces,{style: style1, onEachFeature: onEachFeature1, time: "3_Janvier_2022"
+                        }
+                );
+				geojson2 = L.geoJson(provinces,{style: style2, onEachFeature: onEachFeature2, time: "4_Janvier_2022"
+                        }
+                );
+				geojson3 = L.geoJson(provinces,{style: style3, onEachFeature: onEachFeature3, time: "5_Janvier_2022"
+                        }
+                );
+				geojson4 = L.geoJson(provinces,{style: style4, onEachFeature: onEachFeature4, time: "6_Janvier_2022"
+                        }
+                );
+				geojson5 = L.geoJson(provinces,{style: style5, onEachFeature: onEachFeature5, time: "7_Janvier_2022"
+                        }
+                );
+				geojson6 = L.geoJson(provinces,{style: style6, onEachFeature: onEachFeature6, time: "6_Janvier_2022"
+                        }
+                );
+				geojson7 = L.geoJson(provinces,{style: style7, onEachFeature: onEachFeature7, time: "9_Janvier_2022"
+                        }
+                );
+				
+						
+				
+				 layerGroup = L.layerGroup([geojson1, geojson2, geojson3, geojson4, geojson5, geojson6, geojson7]);
+				var sliderControl = L.control.sliderControl({layer:layerGroup, follow: true});
+				mymap.addControl(sliderControl);
+				sliderControl.startSlider();
+    
+				// KEY
+
+                var legend = L.control({position: 'bottomleft'});
+
+                legend.onAdd = function (map) {
+
+					var div = L.DomUtil.create('div', 'info legend');
+							grades = [0, 10, 20, 30];
+							labels = [];
+							
+					// loop through our density intervals and generate a label with a colored square for each interval
+					for (var i = 0; i < grades.length; i++) {
+					div.innerHTML +='<i style="background:' + getColor(grades[i] +10) + '"></i> ' +
+					grades[i] + (grades[i + 10] ? '&ndash;' + grades[i + 10] + '<br>' : '<');
+				}
+
+				return div;
+				};
+
+
+				 legend.addTo(mymap);
+
+                 
+        var info = L.control();
+
+info.onAdd = function (mymap) {
+    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+    this.update();
+    return this._div;
+};
+
+// method that we will use to update the control based on feature properties passed
+info.update = function (props) {
+    this._div.innerHTML =   (props ?
+        'Province  : <b>' + props.properties.Nom_Provin + '</b> <br />Nom_Provin : ' + props.properties.Nom_Provin + ' .....</sup>'
+        : 'Merci de glisser le cursuer'); 
+};
+
+info.addTo(mymap);
+var geojson = L.geoJson(provinces, {
+        style: Monstyle,
+        onEachFeature: onEachFeature,
+}).addTo(mymap);
+
+   	
+				
+            </script>
+
+</body>
+</html>
